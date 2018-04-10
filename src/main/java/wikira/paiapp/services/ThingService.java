@@ -66,6 +66,29 @@ public class ThingService implements IThingService {
         }else {
             return new ThingDto();
         }
+    }
+
+    @Override
+    public void deleteById(Long userId, Long thingId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+
+        if(userOptional.isPresent()){
+            User user = userOptional.get();
+
+            Optional<ThingToDo> thingToDoOptional = user.getThings()
+                    .stream()
+                    .filter(things -> things.getId().equals(thingId))
+                    .findFirst();
+
+            if(thingToDoOptional.isPresent()){
+                ThingToDo thingToDelete = thingToDoOptional.get();
+                user.getThings().remove(thingToDelete);
+                thingToDelete.setUser(null);
+                userRepository.save(user);
+            }
+        }
 
     }
+
+
 }

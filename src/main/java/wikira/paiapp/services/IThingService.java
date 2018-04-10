@@ -7,4 +7,6 @@ public interface IThingService {
 
     ThingDto saveThingDto(ThingDto thing);
 
+    void deleteById(Long userId, Long thingId);
+
 }

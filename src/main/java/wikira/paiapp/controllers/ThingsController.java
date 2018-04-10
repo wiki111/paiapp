@@ -78,4 +78,12 @@ public class ThingsController {
         return "/things/showthings";
     }
 
+    @GetMapping("/user/{userId}/thing/{thingId}/delete")
+    public String deleteThing(@PathVariable String userId, @PathVariable String thingId, Model model){
+
+        thingService.deleteById(Long.valueOf(userId), Long.valueOf(thingId));
+
+        return "redirect:/things/show";
+    }
+
 }

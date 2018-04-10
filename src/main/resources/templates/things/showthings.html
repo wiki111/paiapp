@@ -20,7 +20,7 @@
             <td th:text="${thing.getDeadline()}"></td>
             <td th:text="${thing.isDone()}"></td>
             <td><a th:href="@{'/user/'+ ${thing.getUser().getId()} +'/things/'+ ${thing.id}+'/update'}">Update</a></td>
-            <td><a th:href="@{'/things/thingdelete'}">Delete</a></td>
+            <td><a th:href="@{'/user/'+ ${thing.getUser().getId()} +'/thing/'+ ${thing.id} +'/delete'}">Delete</a></td>
         </tr>
     </table>
     <br>
