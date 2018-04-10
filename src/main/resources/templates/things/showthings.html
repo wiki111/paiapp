@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Completion Condition</th>
+            <th>Deadline</th>
+            <th>Done</th>
+        </tr>
+        <tr th:each="thing : ${things}">
+            <td th:text="${thing.getDescription()}"></td>
+            <td th:text="${thing.getCompletionCondition()}"></td>
+            <td th:text="${thing.getDeadline()}"></td>
+            <td th:text="${thing.isDone()}"></td>
+        </tr>
+    </table>
+</body>
+</html>

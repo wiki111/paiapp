@@ -1,1 +1,2 @@
 INSERT INTO user (email, first_name, last_name, password) VALUES ('matt.daniels@gmail.com', 'Matt', 'Daniels', '$2a$11$G8q8OIHXUBM/slWW3j4pre6UK4pheQp/ZCAIy9qHlV1F4GNQY.pku');
+INSERT INTO thing_to_do (completion_condition, deadline, description, done, user_id) VALUES ('Some cond', '2018-04-20', 'Some desc', 'false', '1')
