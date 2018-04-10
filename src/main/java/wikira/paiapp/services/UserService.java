@@ -7,6 +7,8 @@ import wikira.paiapp.dto.UserDto;
 import wikira.paiapp.model.User;
 import wikira.paiapp.repositories.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserService implements IUserService{
 
@@ -45,6 +47,16 @@ public class UserService implements IUserService{
 
         if(user != null){
             return user;
+        }else{
+            return null;
+        }
+    }
+
+    public User findById(Long id){
+        Optional<User> user = repository.findById(id);
+
+        if(user.isPresent()){
+            return user.get();
         }else{
             return null;
         }

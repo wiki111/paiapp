@@ -11,13 +11,19 @@
             <th>Completion Condition</th>
             <th>Deadline</th>
             <th>Done</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
         <tr th:each="thing : ${things}">
             <td th:text="${thing.getDescription()}"></td>
             <td th:text="${thing.getCompletionCondition()}"></td>
             <td th:text="${thing.getDeadline()}"></td>
             <td th:text="${thing.isDone()}"></td>
+            <td><a th:href="@{'/user/'+ ${thing.getUser().getId()} +'/things/'+ ${thing.id}+'/update'}">Update</a></td>
+            <td><a th:href="@{'/things/thingdelete'}">Delete</a></td>
         </tr>
     </table>
+    <br>
+    <a th:href="@{'/things/thingsform'}">Add New Thing !</a>
 </body>
 </html>

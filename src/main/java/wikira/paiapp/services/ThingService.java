@@ -38,9 +38,21 @@ public class ThingService implements IThingService {
         if(userOptional.isPresent()){
             User user = userOptional.get();
 
-            ThingToDo thingToDo = dtoToThing.convert(thing);
-            thingToDo.setUser(user);
-            user.addThing(thingToDo);
+            Optional<ThingToDo> thingToDoOptional = user.getThings()
+                    .stream()
+                    .filter(things -> things.getId().equals(thing.getId()))
+                    .findFirst();
+
+            if(thingToDoOptional.isPresent()){
+                ThingToDo thingFound = thingToDoOptional.get();
+                thingFound.setDescription(thing.getDescription());
+                thingFound.setDeadline(thing.getDeadline());
+                thingFound.setCompletionCondition(thing.getCompletionCondition());
+            }else{
+                ThingToDo thingToDo = dtoToThing.convert(thing);
+                thingToDo.setUser(user);
+                user.addThing(thingToDo);
+            }
 
             User savedUser = userRepository.save(user);
 
