@@ -1,9 +1,12 @@
 package wikira.paiapp.dto;
 
 import lombok.Data;
+import wikira.paiapp.model.ThingToDo;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 public class UserDto {
@@ -25,5 +28,6 @@ public class UserDto {
     @NotEmpty
     private String email;
 
+    private Set<ThingToDo> things = new HashSet<>();
 
 }

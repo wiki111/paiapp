@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a Thing</title>
+</head>
+<body>
+
+<h1>Form</h1>
+
+<form th:action="@{/things/thingsform}" th:object="${thing}" method="POST" enctype="utf8">
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{userId}">
+    <div>
+        <label>Description</label>
+        <input th:field="*{description}">
+    </div>
+    <div>
+        <label>Deadline</label>
+        <input type="date" th:field="*{deadline}"/>
+    </div>
+    <div>
+        <label>Completion Condition</label>
+        <input th:field="*{completionCondition}"/>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

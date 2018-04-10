@@ -3,6 +3,7 @@ package wikira.paiapp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import wikira.paiapp.converters.DtoToUser;
 import wikira.paiapp.dto.UserDto;
 import wikira.paiapp.model.User;
 import wikira.paiapp.repositories.UserRepository;
@@ -16,19 +17,18 @@ public class UserService implements IUserService{
     @Autowired
     private UserRepository repository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
+    private final DtoToUser dtoToUser;
+
+    public UserService(DtoToUser dtoToUser) {
+        this.dtoToUser = dtoToUser;
+    }
 
     @Override
     public User registerNewAccount(UserDto accountDto){
 
         if(!emailExists(accountDto.getEmail())){
-            User user = new User();
-            user.setFirstName(accountDto.getFirstName());
-            user.setLastName(accountDto.getLastName());
-            user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
-            user.setEmail(accountDto.getEmail());
-            user.setRole("ROLE_USER");
+            User user = dtoToUser.convert(accountDto);
             return repository.save(user);
         }else{
             return null;
@@ -42,5 +42,15 @@ public class UserService implements IUserService{
             return true;
         }
         return false;
+    }
+
+    public User findByUsername(String username){
+        User user = repository.findByEmail(username);
+
+        if(user != null){
+            return user;
+        }else{
+            return null;
+        }
     }
 }
