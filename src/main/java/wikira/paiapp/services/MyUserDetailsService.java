@@ -20,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+//TODO error handling
+
 @Service
 @Transactional
 public class MyUserDetailsService implements UserDetailsService {
@@ -29,27 +31,43 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
         wikira.paiapp.model.User user = repository.findByEmail(email);
+
         if (user == null) {
             throw new UsernameNotFoundException(
                     "No user found with username: "+ email);
         }
+
+        return createUser(user);
+    }
+
+    private User createUser(wikira.paiapp.model.User user){
+
         boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
-        return  new org.springframework.security.core.userdetails.User
-                (user.getEmail(),
-                        user.getPassword(), enabled, accountNonExpired,
-                        credentialsNonExpired, accountNonLocked,
-                        getAuthorities(Arrays.asList("ROLE_USER")));
+
+        return  new org.springframework.security.core.userdetails.User(
+                    user.getEmail(),
+                    user.getPassword(),
+                    enabled,
+                    accountNonExpired,
+                    credentialsNonExpired,
+                    accountNonLocked,
+                    getAuthorities(Arrays.asList("ROLE_USER"))
+        );
+
     }
 
     private static List<GrantedAuthority> getAuthorities (List<String> roles) {
+
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (String role : roles) {
             authorities.add(new SimpleGrantedAuthority(role));
         }
+
         return authorities;
     }
 

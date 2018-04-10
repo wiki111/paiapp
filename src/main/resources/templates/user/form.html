@@ -8,7 +8,7 @@
 
     <h1>Form</h1>
 
-    <form th:action="@{/user/registrationform}" th:object="${user}" method="POST" enctype="utf8">
+    <form th:action="@{/user/form}" th:object="${user}" method="POST" enctype="utf8">
         <div>
             <label>First Name</label>
             <input th:field="*{firstName}">

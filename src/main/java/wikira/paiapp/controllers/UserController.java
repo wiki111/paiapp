@@ -16,10 +16,14 @@ import wikira.paiapp.services.IUserService;
 
 import javax.validation.Valid;
 
+
 @Controller
 public class UserController {
 
     private IUserService service;
+
+    private static final String USER_REGISTRATION_URL = "/user/form";
+    private static final String USER_REGISTER_SUCCESS_URL = "/user/successRegister";
 
     public UserController(IUserService service) {
         this.service = service;
@@ -27,32 +31,28 @@ public class UserController {
 
     @GetMapping(value = "/user/registration")
     public String showRegistrationForm(WebRequest request, Model model) {
+
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
-        return "/user/registrationform";
+
+        return USER_REGISTRATION_URL;
     }
 
-    @PostMapping("/user/registrationform")
+    @PostMapping("/user/form")
     public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto accountDto,
                                             BindingResult result, WebRequest request, Errors errors){
+
         User registered = new User();
+
         if(!result.hasErrors()){
-            registered = createUserAccount(accountDto, result);
+            registered = service.registerNewAccount(accountDto);
         }
 
         if(registered == null){
             result.rejectValue("email", "message.regError");
         }
 
-        return new ModelAndView("/user/successRegister", "user", accountDto);
-
-    }
-
-    private User createUserAccount(UserDto accountDto, BindingResult result){
-
-        User registered = service.registerNewAccount(accountDto);
-
-        return registered;
+        return new ModelAndView(USER_REGISTER_SUCCESS_URL, "user", accountDto);
 
     }
 

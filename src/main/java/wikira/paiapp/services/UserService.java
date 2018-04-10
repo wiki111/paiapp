@@ -9,6 +9,9 @@ import wikira.paiapp.repositories.UserRepository;
 
 import java.util.Optional;
 
+//TODO refactor
+//TODO error handling
+
 @Service
 public class UserService implements IUserService{
 
@@ -42,6 +45,7 @@ public class UserService implements IUserService{
         return false;
     }
 
+    @Override
     public User findByUsername(String username){
         User user = repository.findByEmail(username);
 
@@ -52,6 +56,7 @@ public class UserService implements IUserService{
         }
     }
 
+    @Override
     public User findById(Long id){
         Optional<User> user = repository.findById(id);
 

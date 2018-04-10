@@ -19,11 +19,12 @@
             <td th:text="${thing.getCompletionCondition()}"></td>
             <td th:text="${thing.getDeadline()}"></td>
             <td th:text="${thing.isDone()}"></td>
+            <!-- TODO clean up urls -->
             <td><a th:href="@{'/user/'+ ${thing.getUser().getId()} +'/things/'+ ${thing.id}+'/update'}">Update</a></td>
-            <td><a th:href="@{'/user/'+ ${thing.getUser().getId()} +'/thing/'+ ${thing.id} +'/delete'}">Delete</a></td>
+            <td><a th:href="@{'/user/'+ ${thing.getUser().getId()} +'/things/'+ ${thing.id} +'/delete'}">Delete</a></td>
         </tr>
     </table>
     <br>
-    <a th:href="@{'/things/thingsform'}">Add New Thing !</a>
+    <a th:href="@{'/things/form'}">Add New Thing !</a>
 </body>
 </html>
