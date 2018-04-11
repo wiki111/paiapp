@@ -2,11 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Home Page</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" />
+    <script th:src="@{/webjars/jquery/3.3.7-1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
 </head>
 <body>
 
-    <h1>Hello dimwit.</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-10 text-center offset-lg-1">
+                <h1>Welcome to SMART To Do List Application</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 text-center offset-lg-1">
+                <a th:href="@{/user/registration}">Register</a>
+            </div>
+            <div class="col-md-5 text-center">
+                <a th:href="@{/user/login}">Login</a>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 </html>
