@@ -3,28 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" />
+    <script th:src="@{/webjars/jquery/3.3.7-1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
 </head>
 <body>
-    <table>
-        <tr>
-            <th>Description</th>
-            <th>Completion Condition</th>
-            <th>Deadline</th>
-            <th>Done</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </tr>
-        <tr th:each="thing : ${things}">
-            <td th:text="${thing.getDescription()}"></td>
-            <td th:text="${thing.getCompletionCondition()}"></td>
-            <td th:text="${thing.getDeadline()}"></td>
-            <td th:text="${thing.isDone()}"></td>
-            <!-- TODO clean up urls -->
-            <td><a th:href="@{'/user/'+ ${thing.getUser().getId()} +'/things/'+ ${thing.id}+'/update'}">Update</a></td>
-            <td><a th:href="@{'/user/'+ ${thing.getUser().getId()} +'/things/'+ ${thing.id} +'/delete'}">Delete</a></td>
-        </tr>
-    </table>
-    <br>
-    <a th:href="@{'/things/form'}">Add New Thing !</a>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Completion Condition</th>
+                    <th>Deadline</th>
+                    <th>Done</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="thing : ${things}">
+                    <td th:text="${thing.getDescription()}"></td>
+                    <td th:text="${thing.getCompletionCondition()}"></td>
+                    <td th:text="${thing.getDeadline()}"></td>
+                    <td th:text="${thing.isDone()}"></td>
+                    <!-- TODO clean up urls -->
+                    <td><a th:href="@{'/user/'+ ${thing.getUser().getId()} +'/things/'+ ${thing.id}+'/update'}">Update</a></td>
+                    <td><a th:href="@{'/user/'+ ${thing.getUser().getId()} +'/things/'+ ${thing.id} +'/delete'}">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <a th:href="@{'/things/form'}" class="btn btn-primary">Wanna add something smart to do ?</a>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

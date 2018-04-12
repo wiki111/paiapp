@@ -3,15 +3,28 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Success!</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}" />
+    <script th:src="@{/webjars/jquery/3.3.7-1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
 </head>
 <body>
-
-    <h1>You bloody bastard ! You actually did it !</h1>
-
-    <p th:text="${user.firstName}"></p>
-    <p th:text="${user.lastName}"></p>
-    <p th:text="${user.email}"></p>
-    <p th:text="${user.password}"></p>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="jumbotron">
+                <h1 class="display-4">You are truly the smartest man I have ever had the pleasure to know.</h1>
+                <p th:text="${user.firstName}" class="lead"></p>
+                <p th:text="${user.lastName}"class="lead"></p>
+                <p th:text="${user.email}" class="lead"></p>
+                <p th:text="${user.password}" class="lead"></p>
+                <hr class="my-4">
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" th:href="@{/user/login}" role="button">Take me to login page.</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
