@@ -46,6 +46,8 @@ public class UserController {
 
         if(!result.hasErrors()){
             registered = service.registerNewAccount(accountDto);
+        }else {
+            return new ModelAndView(USER_REGISTRATION_URL, "user", accountDto);
         }
 
         if(registered == null){

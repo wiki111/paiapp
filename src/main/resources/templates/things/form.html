@@ -16,19 +16,37 @@
             <h1>Add a smart thing to do !</h1>
 
             <form th:action="@{/things/form}" th:object="${thing}" method="POST" enctype="utf8">
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <p>Please Correct Errors Below</p>
+                </div>
                 <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:field="*{userId}">
                 <div class="form-group">
                     <label for="description">Description</label>
                     <input type="text" class="form-control" id="description" th:field="*{description}">
+                    <span class="help-block" th:if="${#fields.hasErrors('description')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('description')}" th:text="${err}"/>
+                        </ul>
+                    </span>
                 </div>
                 <div class="form-group">
                     <label for="deadline">Deadline</label>
                     <input type="date" class="form-control" id="deadline" th:field="*{deadline}">
+                    <span class="help-block" th:if="${#fields.hasErrors('deadline')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('deadline')}" th:text="${err}"/>
+                        </ul>
+                    </span>
                 </div>
                 <div class="form-group">
                     <label for="completion">Completion condition : </label>
                     <input type="text" class="form-control" id="completion" th:field="*{completionCondition}">
+                    <span class="help-block" th:if="${#fields.hasErrors('completionCondition')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('completionCondition')}" th:text="${err}"/>
+                        </ul>
+                    </span>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

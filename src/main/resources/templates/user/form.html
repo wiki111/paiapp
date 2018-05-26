@@ -18,28 +18,47 @@
                 <h1>Form</h1>
 
                 <form th:action="@{/user/form}" th:object="${user}" method="POST" enctype="utf8">
+                    <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                        <p>Please Correct Errors Below</p>
+                    </div>
                     <div class="form-group">
                         <label>First Name</label>
                         <input th:field="*{firstName}" class="form-control">
-                        <p th:each="error: ${#fields.errors('firstName')}" th:text="${error}"> First Name Invalid</p>
+                        <span class="help-block" th:if="${#fields.hasErrors('firstName')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}"/>
+                            </ul>
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>Last Name</label>
                         <input th:field="*{lastName}" class="form-control"/>
-                        <p th:each="error:${#fields.errors('lastName')}" th:text="${error}">Last Name Invalid</p>
+                        <span class="help-block" th:if="${#fields.hasErrors('lastName')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}"/>
+                            </ul>
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
                         <input type="email" th:field="*{email}" class="form-control"/>
-                        <p th:each="error : ${#fields.errors('email')}" th:text="${error}">Email Error</p>
+                        <span class="help-block" th:if="${#fields.hasErrors('email')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('email')}" th:text="${err}"/>
+                            </ul>
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>Password</label>
                         <input type="password" th:field="*{password}"  class="form-control"/>
-                        <p th:each="error:${#fields.errors('password')}" th:text="${error}">Password Error</p>
+                        <span class="help-block" th:if="${#fields.hasErrors('password')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('password')}" th:text="${err}"/>
+                            </ul>
+                        </span>
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
+                        <label>Confirm password</label>
                         <input type="password" th:field="*{matchingPassword}" class="form-control"/>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>

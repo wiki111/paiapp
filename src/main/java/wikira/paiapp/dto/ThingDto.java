@@ -7,6 +7,7 @@ import wikira.paiapp.model.User;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Data
@@ -19,12 +20,15 @@ public class ThingDto {
 
     @NotEmpty
     @NotNull
+    @Size(min=2, max=512)
     private String description;
 
     @NotNull
+    @NotEmpty
     private boolean done;
 
     @NotNull
+    @NotEmpty
     private Date deadline;
 
     @NotEmpty

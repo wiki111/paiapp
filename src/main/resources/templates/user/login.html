@@ -11,10 +11,10 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-10 offset-lg-1">
-            <div th:if="${param.error}">
+            <div class="alert alert-danger" th:if="${param.error}">
                 Invalid username and password.
             </div>
-            <div th:if="${param.logout}">
+            <div class="alert alert-info" th:if="${param.logout}">
                 You have been logged out.
             </div>
             <form th:action="@{/user/login}" method="post">
@@ -27,7 +27,7 @@
                     <input type="password" name="password" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" value="Sign In"/>
+                    <button type="submit" name="Submit" class="btn btn-primary" value="Sign In">Sign In</button>
                 </div>
             </form>
 

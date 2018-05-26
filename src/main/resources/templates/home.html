@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,12 +19,22 @@
             <div class="col-lg-2 text-center pt-3">
                 <a th:href="@{/user/registration}" >Register</a>
             </div>
-            <div class="col-lg-2 text-center pt-3">
+            <div class="col-lg-2 text-center pt-3" sec:authorize="isAnonymous()">
                 <a th:href="@{/user/login}" >Login</a>
+            </div>
+            <div class="col-lg-2 text-center pt-3" sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}">Log out</a>
+            </div>
+        </div>
+        <div class="row pt-3" sec:authorize="isAuthenticated()">
+            <div class="col-lg-3 offset-lg-1">
+                <a class="btn btn-primary" th:href="@{/things/show}">Show things to do</a>
+            </div>
+            <div class="col-lg-3 offset-lg-1">
+                <a class="btn btn-primary" th:href="@{/things/form}">Add things to do</a>
             </div>
         </div>
     </div>
-
 
 </body>
 </html>

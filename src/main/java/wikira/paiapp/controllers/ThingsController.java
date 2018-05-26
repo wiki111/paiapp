@@ -62,6 +62,10 @@ public class ThingsController {
     @PostMapping(THING_FORM_URL)
     public String saveThingToDo(@Valid @ModelAttribute("thing") ThingDto thingDto, BindingResult result){
 
+        if(result.hasErrors()){
+            return THING_FORM_URL;
+        }
+
         ThingDto savedThing = thingService.saveThingDto(thingDto);
 
         return "redirect:" + THINGS_SHOW_URL;
